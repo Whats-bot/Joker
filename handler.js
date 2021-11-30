@@ -908,14 +908,15 @@ module.exports = handle = (client, Client) => {
 					Client.self = false
 					data.reply('OK')
 				break
-                case 'меню':
+                case 'command':
                 case 'cmd':
                 case 'menu':
                 case 'help':
                 case 'list':
-                    const mediaMsg = await client.prepareMessageMedia(await getBuffer(configs.imgUrl), 'imageMessage')
-                    const buttonMessage = {
-                           footerText: 'ПОМОЩНИК',
+ 	                 const mediaMsg = await client.prepareMessageMedia(await getBuffer(configs.imgUrl), 'imageMessage')
+                     const buttonMessage = {
+                           contentText: menu(data.prefix, data.pushname),
+                           footerText: '𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏-𝐁𝐎𝐓',
                                 "contextInfo": {
 									  mentionedJid: [configs.ownerList[0]],
                                       participant: sender,
@@ -933,7 +934,7 @@ module.exports = handle = (client, Client) => {
                                      {
                                        buttonId: `${data.prefix}owner`,
                                        buttonText: {
-                                          displayText: "🪀 ВЛАДЕЛЕЦ"
+                                          displayText: "🪀 𝐎𝐖𝐍𝐄𝐑"
                                         },
                                          "type": "RESPONSE"
                                      },
