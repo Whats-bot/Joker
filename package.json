@@ -1,5 +1,5 @@
 {
-  "name": "whatsapp-bot",
+  "name": "valera",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -30,12 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/justpiple/whatsapp-bot.git"
+    "url": "git+https://github.com/FREDOM1979/valera.git"
   },
   "author": "ben",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/justpiple/whatsapp-bot/issues"
+    "url": "https://github.com/FREDOM1979/valera/issues"
   },
-  "homepage": "https://github.com/justpiple/whatsapp-bot#readme"
+  "homepage": "https://github.com/FREDOM1979/valera#readme"
 }

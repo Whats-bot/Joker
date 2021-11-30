@@ -6,11 +6,11 @@
  <p>
   <img src ="https://img.shields.io/badge/npm-v7.20.3-green.svg" />
   <img src="https://img.shields.io/badge/node-%3E=16.6.1-darkgreen.svg" />
-   <a href="https://github.com/justpiple/whatsapp-bot/commit-activity" target="_blank">
+   <a href="https://github.com/FREDOM1979/valera/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-no-red.svg" />
   </a>
 </p>
-<a href="https://chat.whatsapp.com/EV2o7Y4C2XNDT5AAQPZjqt"><img alt="WhatsApp" src="https://img.shields.io/badge/WhatsApp%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
+<a href="https://chat.whatsapp.com/EV2o7Y4"><img alt="WhatsApp" src="https://img.shields.io/badge/WhatsApp%20Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
  
 </div>
 
@@ -22,8 +22,8 @@
 ### Install ⬇️
 
 ```bash
-> git clone https://github.com/justpiple/whatsapp-bot/
-> cd whatsapp-bot
+> git clone https://github.com/FREDOM1979/valera/
+> cd valera
 > npm i
 ```
 ### For termux users before running the above command write this command
@@ -43,15 +43,3 @@
 `options`
  `port`
 --port [port number]
-
-after start it you need to scan the qr
-#### Session name and options is optional
-### Contact me
-
-- [TELEGRAM](https://t.me/justpiple)
-- [WHATSAPP](http://wa.me/62813309603730)
-- [GROUP CHAT WHATSAPP](https://chat.whatsapp.com/EV2o7Y4C2XNDT5AAQPZjqt)
-
-
-## 🙏 Special Thanks to
-* <a href="https://github.com/adiwajshing/Baileys"><img alt="GitHub" src="https://img.shields.io/badge/@adiwajshing/Baileys%20-%23121011.svg?style=flat-square&logo=npm&color=white"/></a>
