@@ -913,8 +913,8 @@ module.exports = handle = (client, Client) => {
                 case 'menu':
                 case 'help':
                 case 'list':
-                     const buttonMessage = {
-                           contentText: menu(data.prefix, data.pushname),
+                    const mediaMsg = await client.prepareMessageMedia(await getBuffer(configs.imgUrl), 'imageMessage')
+                    const buttonMessage = {
                            footerText: 'ПОМОЩНИК',
                                 "contextInfo": {
 									  mentionedJid: [configs.ownerList[0]],
