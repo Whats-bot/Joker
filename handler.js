@@ -416,7 +416,7 @@ module.exports = handle = (client, Client) => {
             afkJs.addAfk(data.from, data.sender, data.body, timesNow)
             Client.sendText(data.from, "```" + `${data.pushname} [@${data.sender.split('@')[0]}] sedang AFK\n\nAlasan: ${data.body}\nTime: ${timesNow}` + "```")
         })
-	     Client.cmd.on('welcome', (data) => {
+	     Client.cmd.on('приветствие', (data) => {
             if(!data.isGroup) return data.reply(mess.admin)
             if(!data.isAdmin) return data.reply(mess.admin)
             const dataGc = JSON.parse(fs.readFileSync('./lib/json/dataGc.json'))
@@ -735,7 +735,7 @@ module.exports = handle = (client, Client) => {
             if(data.mentionedJidList.length == 0) return data.reply(`Kirim perintah *${data.prefix}${data.command} [ @tag ]*\nContoh : ${data.prefix}${data.command} @0`)
             client.groupDemoteAdmin(data.from, data.mentionedJidList).then(() => data.reply(`Perintah diterima, menghapus admin @${data.mentionedJidList.join(' @').replace(/@s.whatsapp.net/g, '')}`)).catch(() => data.reply('Gagal!'))
         })
-        Client.cmd.on('kick', async (data) => {
+        Client.cmd.on('удалить', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.isAdmin) return data.reply(mess.admin)
@@ -743,7 +743,7 @@ module.exports = handle = (client, Client) => {
             if(data.mentionedJidList.length == 0) return data.reply(`Kirim perintah *${data.prefix}${data.command} [ @tag ]*\nContoh : ${data.prefix}${data.command} @0`)
             data.mentionedJidList.forEach(async jid =>{ client.groupRemove(data.from, [jid]).then(x => data.reply(`Sukses kick @${jid.split('@')[0]}`)).catch(x => data.reply(`Gagal kick @${jid.split('@')[0]}`)); await sleep(2000)})
         })
-        Client.cmd.on('add', async (data) => {
+        Client.cmd.on('добавить', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.isAdmin) return data.reply(mess.admin)
@@ -908,8 +908,8 @@ module.exports = handle = (client, Client) => {
 					Client.self = false
 					data.reply('OK')
 				break
-                case 'command':
-                case 'cmd':
+                case 'меню':
+                case 'меню':
                 case 'menu':
                 case 'help':
                 case 'list':
@@ -951,7 +951,7 @@ module.exports = handle = (client, Client) => {
                 case 's':
                 case 'stiker':
                 case 'stickergif':
-                case 'stikergif':
+                case 'стикер':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
                     if(type != 'videoMessage' && !isQuotedVideo && !isQuotedImage && type != 'imageMessage') return data.reply('Wrong format!')
                     const getbuff = data.isQuotedVideo || data.isQuotedImage ? JSON.parse(JSON.stringify(data.message).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : data.message
