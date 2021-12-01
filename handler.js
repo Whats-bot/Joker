@@ -913,38 +913,31 @@ module.exports = handle = (client, Client) => {
                 case 'menu':
                 case 'help':
                 case 'list':
- 	                 const mediaMsg = await client.prepareMessageMedia(await getBuffer(configs.imgUrl), 'imageMessage')
-                     const buttonMessage = {
-                           contentText: menu(data.prefix, data.pushname),
-                           footerText: '𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏-𝐁𝐎𝐓',
-                                "contextInfo": {
-									  mentionedJid: [configs.ownerList[0]],
-                                      participant: sender,
-                                      stanzaId: message.key.id,
-                                      quotedMessage: message.message,
-                                     },
-                                     buttons: [
-                                     {
-                                       buttonId: `${data.prefix}info`,
-                                       buttonText: {
-                                          displayText: "📒 𝐈𝐍𝐅𝐎"
-                                        },
-                                         "type": "RESPONSE"
-                                     },
-                                     {
-                                       buttonId: `${data.prefix}owner`,
-                                       buttonText: {
-                                          displayText: "🪀 𝐎𝐖𝐍𝐄𝐑"
-                                        },
-                                         "type": "RESPONSE"
-                                     },
-                                        ],
-                                         headerType: 4,
-                                     ...mediaMsg 
-                                     }
-                    let zz = await client.prepareMessageFromContent(from, {buttonsMessage: buttonMessage}, {})
-                	client.relayWAMessage(zz, {waitForAck: true})     
-                    break
+                    const mediaMsg = await client.prepareMessageMedia(await getBuffer(configs.imgUrl), 'imageMessage')
+                    const buttonMessage = {
+                          contentText: menu(data.prefix, data.pushname),
+                          footerText: '𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏-𝐁𝐎𝐓',
+                               "contextInfo": {
+                                     mentionedJid: [configs.ownerList[0]],
+                                     participant: sender,
+                                     stanzaId: message.key.id,
+                                     quotedMessage: message.message,
+                                    },
+                                    buttons: [
+                                    {
+                                      buttonId: `${data.prefix}owner`,
+                                      buttonText: {
+                                         displayText: "🪀 𝐎𝐖𝐍𝐄𝐑"
+                                       },
+                                        "type": "RESPONSE"
+                                    },
+                                       ],
+                                        headerType: 4,
+                                    ...mediaMsg 
+                                    }
+                   let zz = await client.prepareMessageFromContent(from, {buttonsMessage: buttonMessage}, {})
+                   client.relayWAMessage(zz, {waitForAck: true})     
+                   break
                     /*STICKER*/
                 case 'sgif':
                 case 'sticker':
