@@ -909,14 +909,11 @@ module.exports = handle = (client, Client) => {
 					data.reply('OK')
 				break
                 case 'меню':
-                case 'меню':
                 case 'menu':
-                case 'help':
-                case 'list':
                     const mediaMsg = await client.prepareMessageMedia(await getBuffer(configs.imgUrl), 'imageMessage')
                     const buttonMessage = {
                           contentText: menu(data.prefix, data.pushname),
-                          footerText: '𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏-𝐁𝐎𝐓',
+                          footerText: 'ПОМОЩНИК',
                                "contextInfo": {
                                      mentionedJid: [configs.ownerList[0]],
                                      participant: sender,
