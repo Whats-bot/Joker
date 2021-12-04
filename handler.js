@@ -166,10 +166,10 @@ module.exports = handle = (client, Client) => {
         })
         Client.cmd.on('limit', async (data) => {
             const dataUser = JSON.parse(fs.readFileSync('./lib/json/dataUser.json'))
-            if(dataUser[data.sender].premium) return data.reply(`Hai @${data.sender.split('@')[0]} 👋🏻\nAnda adalah user premium yang memiliki akses tanpa batas limit!`)
+            if(dataUser[data.sender].premium) return data.reply(`Привет @${data.sender.split('@')[0]} 👋🏻\nВы премиум-пользователь с неограниченным доступом!`)
             limits = configs.maxLimit - dataUser[data.sender].limit
-            if(limits <= 0) return data.reply("```" + `Limit anda sudah habis` + "```")
-            data.reply(`Hai @${data.sender.split('@')[0]} 👋🏻\n Limit anda tersisa ${limits || 30}\nLimit setiap hari di reset jam 00.00\nJika anda ingin mendapatkan unlimited limit silahkan chat owner bot ketik !owner`)
+            if(limits <= 0) return data.reply("```" + `Ваш лимит истек` + "```")
+            data.reply(`Привет @${data.sender.split('@')[0]} 👋🏻\n Ваш лимит остался ${limits || 30}\nСуточный лимит на сброс в 2.00 по МСК`)
         })
         Client.cmd.on('info', async (data) => {
 		data.reply(ingfo)
