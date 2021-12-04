@@ -17,7 +17,7 @@ module.exports = handle = (client, Client) => {
         Client.cmd.on('ytmp4', async (data) => {
             try {
                 if(isLimit(data.sender)) return data.reply(mess.limit)
-                if(data.body == "") return data.reply(`Kirim perintah *${data.prefix}ytmp4 [ link ]*\nContoh : ${data.prefix}ytmp4 https://www.youtube.com/watch?v=0maWbr0FHKY`)
+                if(data.body == "") return data.reply(`Отправлять заказы *${data.prefix}ytmp4 [ link ]*\nПример : ${data.prefix}ytmp4 https://www.youtube.com/watch?v=0maWbr0FHKY`)
                 data.reply(mess.wait)
                 res = await axios.get(`${configs.apiUrl}/api/ytmp4/2?apikey=${configs.zeksKey}&url=${data.body}`)
                 if(res.data.status == false) data.reply(res.data.message)
@@ -27,13 +27,13 @@ module.exports = handle = (client, Client) => {
                 Client.sendFileFromUrl(data.from, `${ytm.thumb}`, 'thumb.jpg', teks, data.message)
                 Client.sendFileFromUrl(data.from, `${ytm.link}`, `${ytm.title} - Download.mp4`, `Video telah terkirim @${data.sender.split('@')[0]}`, data.message)
             } catch {
-                data.reply('Ups maaf server sedang error atau mungkin apikey invalid')
+                data.reply('К сожалению, ссылка неверна или может быть недействительной')
             }
         })
         Client.cmd.on('ytmp3', async (data) => {
             try {
                 if(isLimit(data.sender)) return data.reply(mess.limit)
-                if(data.body == "") return data.reply(`Kirim perintah *${data.prefix}ytmp3 [ link ]*\nContoh : ${data.prefix}ytmp3 https://www.youtube.com/watch?v=0maWbr0FHKY`)
+                if(data.body == "") return data.reply(`Отправлять заказы *${data.prefix}ytmp3 [ link ]*\nПример : ${data.prefix}ytmp3 https://www.youtube.com/watch?v=0maWbr0FHKY`)
                 data.reply(mess.wait)
                 res = await axios.get(`${configs.apiUrl}/api/ytmp3/2?apikey=${configs.zeksKey}&url=${data.body}`)
                 if(res.data.status == false) data.reply(res.data.message)
@@ -43,7 +43,7 @@ module.exports = handle = (client, Client) => {
                 Client.sendFileFromUrl(data.from, `${ytm.thumb}`, 'thumb.jpg', teks, data.message)
                 Client.sendFileFromUrl(data.from, `${ytm.link}`, `${ytm.title} - Download.mp3`, ``, data.message)
             } catch {
-                data.reply('Ups maaf server sedang error atau mungkin apikey invalid')
+                data.reply('К сожалению, ссылка неверна или может быть недействительной')
             }
         })
         Client.cmd.on('playvid', async (data) => {
