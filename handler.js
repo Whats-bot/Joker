@@ -598,7 +598,7 @@ module.exports = handle = (client, Client) => {
             client.relayWAMessage(po, {waitForAck: true})
 			}
         })
-		Client.cmd.on('antilink', (data) => {
+		Client.cmd.on('антисылка', (data) => {
             if(!data.isGroup) return data.reply(mess.admin)
             if(!data.isAdmin) return data.reply(mess.admin)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
@@ -641,7 +641,7 @@ module.exports = handle = (client, Client) => {
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
             if(!data.isAdmin) return data.reply(mess.admin)
             client.revokeInvite(data.from)
-            data.reply(`Linkgroup berhasil di reset oleh admin @${data.sender.split('@')[0]}`)
+            data.reply(`Ссылка группы успешно сброшена администратором @${data.sender.split('@')[0]}`)
         })
         Client.cmd.on('group', (data) => {
             if(!data.isGroup) return data.reply(mess.group)
@@ -1466,7 +1466,7 @@ module.exports = handle = (client, Client) => {
 					break
                     /*GROUP*/
                 case 'hidetag':
-                case 'everyone':
+                case 'обьяление':
                     if(!isAdmin) return data.reply('only be used by admin!')
                     var mention = []
                     data.groupMetadata.participants.forEach((member, i) => {
@@ -1478,24 +1478,24 @@ module.exports = handle = (client, Client) => {
                         }
                     })
                     break
-                case 'linkgroup':
+                case 'ссылкагруппы':
                     if(!data.isGroup) return data.reply(mess.group)
                     if(!data.botIsAdmin) return data.reply(mess.botAdmin)
                     linkgc = await client.groupInviteCode(data.from)
                     data.reply(`https://chat.whatsapp.com/${linkgc}`)
                     break
                     /*DLL*/
-                case 'stickermenu':
-                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/menus.webp'), message).then(resData => Client.sendText(from, 'gunakan sticker ini untuk menampilkan menu!', {
+                case 'стикерменю':
+                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/menus.webp'), message).then(resData => Client.sendText(from, 'используйте эту наклейку для отображения меню!', {
                         quoted: resData
                     }))
-                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/sticks.webp'), message).then(resData => Client.sendText(from, 'gunakan sticker ini untuk membuat sticker dengan cara reply image/video dengan sticker ini', {
+                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/sticks.webp'), message).then(resData => Client.sendText(from, 'используйте этот стикер, чтобы сделать стикер, отметив изображение или видео!', {
                         quoted: resData
                     }))
-                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/open.webp'), message).then(resData => Client.sendText(from, 'gunakan sticker ini untuk membuka group', {
+                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/open.webp'), message).then(resData => Client.sendText(from, 'используйте этот стикер, чтобы открыть группу', {
                         quoted: resData
                     }))
-                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/close.webp'), message).then(resData => Client.sendText(from, 'gunakan sticker ini untuk menutup group', {
+                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/close.webp'), message).then(resData => Client.sendText(from, 'используйте этот стикер, чтобы закрыть группу', {
                         quoted: resData
                     }))
                     break
