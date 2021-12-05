@@ -123,14 +123,6 @@ module.exports = handle = (client, Client) => {
             res = await axios.get(`${configs.apiUrl}/api/fml?apikey=${configs.zeksKey}`)
             data.reply(res.data.result)
         })
-        Client.cmd.on('randomquran', async (data) => {
-            if(isLimit(data.sender)) return data.reply(mess.limit)
-            res = await axios.get(`${configs.apiUrl}/api/randomquran?apikey=${configs.zeksKey}`)
-            rquran = res.data.result
-            teks = `*Surah* : ${rquran.nama}\n*Arti* : ${rquran.arti}\n*Ayat* : ${rquran.asma}\n*Keterangan* : ${rquran.keterangan}`
-            data.reply(teks)
-            Client.sendFileFromUrl(data.from, rquran.audio, 'quran.mp3', ``, data.message)
-        })
         Client.cmd.on('estetikpic', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
             Client.sendFileFromUrl(data.from, `${configs.apiUrl}/api/estetikpic?apikey=${configs.zeksKey}`, 'estetik.jpg', ``, data.message)
@@ -152,18 +144,6 @@ module.exports = handle = (client, Client) => {
             nick = n[Math.floor(Math.random() * n.length)]
             data.reply(nick)
         })
-        Client.cmd.on('quotes', async (data) => {
-            if(isLimit(data.sender)) return data.reply(mess.limit)
-            res = await axios.get(`${configs.apiUrl}/api/quote?apikey=${configs.zeksKey}`)
-            que = res.data.result
-            teks = `*Author* : ${que.author}\n*Quotes* : ${que.quotes}`
-            data.reply(teks)
-        })
-        Client.cmd.on('pantun', async (data) => {
-            if(isLimit(data.sender)) return data.reply(mess.limit)
-            res = await axios.get(`${configs.apiUrl}/api/pantun?apikey=${configs.zeksKey}`)
-            data.reply(res.data.result.pantun)
-        })
         Client.cmd.on('limit', async (data) => {
             const dataUser = JSON.parse(fs.readFileSync('./lib/json/dataUser.json'))
             if(dataUser[data.sender].premium) return data.reply(`Привет @${data.sender.split('@')[0]} 👋🏻\nВы премиум-пользователь с неограниченным доступом!`)
@@ -171,9 +151,6 @@ module.exports = handle = (client, Client) => {
             if(limits <= 0) return data.reply("```" + `Ваш лимит истек` + "```")
             data.reply(`Привет @${data.sender.split('@')[0]} 👋🏻\n Ваш лимит остался ${limits || 30}\nСуточный лимит на сброс в 2.00 по МСК`)
         })
-        Client.cmd.on('info', async (data) => {
-		data.reply(ingfo)
-		})
 		/*ANIME*/
         Client.cmd.on('waifu', async (data) => {
 			if(isLimit(data.sender)) return data.reply(mess.limit)
@@ -910,6 +887,9 @@ module.exports = handle = (client, Client) => {
 				break
                 case 'меню':
                 case 'menu':
+                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/welcome.mp3'), message).then(resData => Client.sendText(from, '', {
+                        quoted: resData
+                    }))
                     const mediaMsg = await client.prepareMessageMedia(await getBuffer(configs.imgUrl), 'imageMessage')
                     const buttonMessage = {
                           contentText: menu(data.prefix, data.pushname),
