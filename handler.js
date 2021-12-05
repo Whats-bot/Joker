@@ -70,7 +70,7 @@ module.exports = handle = (client, Client) => {
                 res = await axios.get(`${configs.apiUrl}/api/ytplaymp3/2?apikey=${configs.zeksKey}&q=${data.body}`)
                 if(res.data.status == false) data.reply(res.data.message)
                 ytm = res.data.result
-                teks = `*Данные успешно получены!*\n\n*Заголовок* : ${ytm.title}\n*Размер* : ${ytm.size}\n*Kualitas* : ${ytm.quality}\n*Ext* : ${ytm.ext}\n*Source* : ${ytm.source}\n\n_Подождите, пока медиафайл будет отправлен. Это может занять несколько минут._`
+                teks = `*Данные успешно получены!*\n\n*Заголовок* : ${ytm.title}\n*Размер* : ${ytm.size}\n*Качество* : ${ytm.quality}\n*Формат* : ${ytm.ext}\n*Источник* : ${ytm.source}\n\n_Подождите, пока медиафайл будет отправлен. Это может занять несколько минут._`
                 if(Number(ytm.size.split(' MB')[0]) >= 50.00) return Client.sendFileFromUrl(data.from, `${ytm.thumb}`, 'thumb.jpg', `*Данные получены успешно!!*\n\n*Заголовок* : ${ytm.title}\n*Размер* : ${ytm.size}\n*Качество* : ${ytm.quality}\n*Формат* : mp3\n*Source* : ${ytm.source}\n*Link* : ${ytm.link}\n\n_Untuk durasi lebih dari batas disajikan dalam bentuk link_`, data.message)
                 Client.sendFileFromUrl(data.from, ytm.thumb, 'thumb.jpg', teks, data.message)
                 Client.sendFileFromUrl(data.from, ytm.link, `${ytm.title} - Download.mp3`, ``, data.message)
@@ -421,12 +421,12 @@ module.exports = handle = (client, Client) => {
             if(!data.isAdmin) return data.reply(mess.admin)
             const dataGc = JSON.parse(fs.readFileSync('./lib/json/dataGc.json'))
             if(data.args[0].toLowerCase() == 'on') {
-                if(dataGc[data.from].welcome) return data.reply('Already on!')
+                if(dataGc[data.from].welcome) return data.reply('Уже включено!!')
                 dataGc[data.from].welcome = true
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
                 data.reply('Sukses!')
             } else if(data.args[0].toLowerCase() == 'off') {
-                if(!dataGc[data.from].welcome) return data.reply('Already off!')
+                if(!dataGc[data.from].welcome) return data.reply('Уже выключено!')
                 dataGc[data.from].welcome = false
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
                 data.reply('Sukses!')
@@ -434,18 +434,18 @@ module.exports = handle = (client, Client) => {
 				let po = client.prepareMessageFromContent(data.from, {
 					"listMessage":{
                   "title": "*ПОМОЩНИК*",
-                  "description": "pilh on/off",
-                  "buttonText": "COMMANDS",
+                 "description": "сделай выбор вкл/выкл",
+                  "buttonText": "КОМАНДЫ",
                   "listType": "SINGLE_SELECT",
                   "sections": [
                      {
                         "rows": [
                            {
-                              "title": "on",
+                              "title": "ВКЛ",
                               "rowId": `${data.prefix}${data.command} on`
                            },
 						   {
-                              "title": "off",
+                              "title": "ВЫКЛ",
                               "rowId": `${data.prefix}${data.command} off`
                            }
                         ]
@@ -504,18 +504,18 @@ module.exports = handle = (client, Client) => {
 				let po = client.prepareMessageFromContent(data.from, {
 					"listMessage":{
                   "title": "*ПОМОЩНИК*",
-                  "description": "pilh on/off",
-                  "buttonText": "COMMANDS",
+                 "description": "сделай выбор вкл/выкл",
+                  "buttonText": "КОМАНДЫ",
                   "listType": "SINGLE_SELECT",
                   "sections": [
                      {
                         "rows": [
                            {
-                              "title": "on",
+                              "title": "ВКЛ",
                               "rowId": `${data.prefix}${data.command} on`
                            },
 						   {
-                              "title": "off",
+                              "title": "ВЫКЛ",
                               "rowId": `${data.prefix}${data.command} off`
                            }
                         ]
@@ -541,18 +541,18 @@ module.exports = handle = (client, Client) => {
 				let po = client.prepareMessageFromContent(data.from, {
 					"listMessage":{
                   "title": "*ПОМОЩНИК*",
-                  "description": "pilh on/off",
-                  "buttonText": "COMMANDS",
+                 "description": "сделай выбор вкл/выкл",
+                  "buttonText": "КОМАНДЫ",
                   "listType": "SINGLE_SELECT",
                   "sections": [
                      {
                         "rows": [
                            {
-                              "title": "on",
+                              "title": "ВКЛ",
                               "rowId": `${data.prefix}${data.command} on`
                            },
 						   {
-                              "title": "off",
+                              "title": "ВЫКЛ",
                               "rowId": `${data.prefix}${data.command} off`
                            }
                         ]
@@ -579,18 +579,18 @@ module.exports = handle = (client, Client) => {
 				let po = client.prepareMessageFromContent(data.from, {
 					"listMessage":{
                   "title": "*ПОМОЩНИК*",
-                  "description": "pilh on/off",
-                  "buttonText": "COMMANDS",
+                 "description": "сделай выбор вкл/выкл",
+                  "buttonText": "КОМАНДЫ",
                   "listType": "SINGLE_SELECT",
                   "sections": [
                      {
                         "rows": [
                            {
-                              "title": "on",
+                              "title": "ВКЛ",
                               "rowId": `${data.prefix}${data.command} on`
                            },
 						   {
-                              "title": "off",
+                              "title": "ВЫКЛ",
                               "rowId": `${data.prefix}${data.command} off`
                            }
                         ]
@@ -604,31 +604,31 @@ module.exports = handle = (client, Client) => {
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
             const dataGc = JSON.parse(fs.readFileSync('./lib/json/dataGc.json'))
             if(data.args[0].toLowerCase() == 'on') {
-                if(dataGc[data.from].antilink) return data.reply('Already on!')
+                if(dataGc[data.from].antilink) return data.reply('Уже включено!')
                 dataGc[data.from].antilink = true
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
                 data.reply('Sukses!')
             } else if(data.args[0].toLowerCase() == 'off') {
-                if(!dataGc[data.from].antilink) return data.reply('Already off!')
+                if(!dataGc[data.from].antilink) return data.reply('Уже выключено!')
                 dataGc[data.from].antilink = false
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Sukses!')
+                data.reply('Успешно!')
             } else {
 				let po = client.prepareMessageFromContent(data.from, {
 					"listMessage":{
                   "title": "*ПОМОЩНИК*",
-                  "description": "pilh on/off",
-                  "buttonText": "COMMANDS",
+                  "description": "сделай выбор вкл/выкл",
+                  "buttonText": "КОМАНДЫ",
                   "listType": "SINGLE_SELECT",
                   "sections": [
                      {
                         "rows": [
                            {
-                              "title": "on",
+                              "title": "ВКЛ",
                               "rowId": `${data.prefix}${data.command} on`
                            },
 						   {
-                              "title": "off",
+                              "title": "ВЫКЛ",
                               "rowId": `${data.prefix}${data.command} off`
                            }
                         ]
@@ -649,26 +649,26 @@ module.exports = handle = (client, Client) => {
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
             if(data.args[0] && data.args[0].toLowerCase() == 'open') {
                 client.groupSettingChange(data.from, GroupSettingChange.messageSend, false)
-                data.reply(`Group telah dibuka oleh admin @${data.sender.split('@')[0]}`)
+                data.reply(`Группа открыта админом @${data.sender.split('@')[0]}`)
             } else if(data.args[0] && data.args[0].toLowerCase() == 'close') {
                 client.groupSettingChange(data.from, GroupSettingChange.messageSend, true)
-                data.reply(`Group telah ditutup oleh admin @${data.sender.split('@')[0]}`)
+                data.reply(`Группа закрыта админом @${data.sender.split('@')[0]}`)
             } else {
 				let po = client.prepareMessageFromContent(data.from, {
 					"listMessage":{
                   "title": "*ПОМОЩНИК*",
-                  "description": "pilh open/close",
-                  "buttonText": "COMMANDS",
+                  "description": "сделай выбор ОТКРЫТЬ/ЗАКРЫТЬ",
+                  "buttonText": "КОМАНДЫ",
                   "listType": "SINGLE_SELECT",
                   "sections": [
                      {
                         "rows": [
                            {
-                              "title": "open",
+                              "title": "ОТКРЫТЬ",
                               "rowId": `${data.prefix}${data.command} open`
                            },
 						   {
-                              "title": "close",
+                              "title": "ЗАКРЫТЬ",
                               "rowId": `${data.prefix}${data.command} close`
                            }
                         ]
