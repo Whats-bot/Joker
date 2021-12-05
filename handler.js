@@ -887,7 +887,7 @@ module.exports = handle = (client, Client) => {
 				break
                 case 'меню':
                 case 'menu':
-                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/welcome.mp3'), message).then(resData => Client.sendText(from, '', {
+                    Client.sendAudio(from, fs.readFileSync('./lib/temp/welcome.mp3'), message).then(resData => Client.sendText(from, '', {
                         quoted: resData
                     }))
                     const mediaMsg = await client.prepareMessageMedia(await getBuffer(configs.imgUrl), 'imageMessage')
