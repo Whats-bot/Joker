@@ -887,10 +887,10 @@ module.exports = handle = (client, Client) => {
 				break
                 case 'меню':
                 case 'menu':
-                    Client.sendAudio(from, fs.readFileSync('./lib/temp/welcome.mp3'), message).then(resData => Client.sendText(from, '', {
+                    const mediaMsg = await client.prepareMessageMedia(await getBuffer(configs.imgUrl), 'imageMessage')
+                    Client.sendAudio(from, fs.readFileSync('./lib/temp/menu.mp3'), message).then(resData => Client.sendText(from, 'меню',{
                         quoted: resData
                     }))
-                    const mediaMsg = await client.prepareMessageMedia(await getBuffer(configs.imgUrl), 'imageMessage')
                     const buttonMessage = {
                           contentText: menu(data.prefix, data.pushname),
                           footerText: 'ПОМОЩНИК',
