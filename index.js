@@ -87,8 +87,8 @@ const starts = async (sesName) => {
                 Client.reply(from, 'ViewOnce detected!', message)
                 client.forwardMessage(from, msg)
             }
-			if (isGroup && !message.isAdmin && dataGc[from].antilink && /https\chat\.whatsapp\.com/gi.test(body)){
-				let dtclink = body.match(/https\chat.whatsapp.com\/(?:invite\/)?([0-9A-Za-z]{18,26})/gi) || []
+            if (isGroup && !message.isAdmin && dataGc[from].antilink && /https/gi.test(body)){
+				let dtclink = body.match(/https\/(?:invite\/)?([0-9A-Za-z]{18,26})/gi) || []
 				dtclink.forEach(async l => {
 					checks = await Client.checkInviteLink(l)
 					if(checks.status == 200){
