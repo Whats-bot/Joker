@@ -78,7 +78,7 @@ const starts = async (sesName) => {
 			}
             if (isGroup && dataGc[from].antitagall && !message.isAdmin && (message.mentionedJidList.length == message.groupMembers.length || message.mentionedJidList.length-1 == message.groupMembers.length)){
                 Client.reply(from, 'Tagall detected', message)
-                client.groupRemove(from, [sender]).catch(() => Client.reply(from, `Jadikan bot admin agar bisa menggunakan fitur antitagall`, message))
+                client.groupRemove(from, [sender]).catch(() => Client.reply(from, `Предоставьте боту, админику для  возможности использовать функцию антитег!`, message))
             }
             if (isGroup && dataGc[from].antiviewonce && message.type == 'viewOnceMessage'){
                 var msg = {...message}
@@ -92,8 +92,8 @@ const starts = async (sesName) => {
 				dtclink.forEach(async l => {
 					checks = await Client.checkInviteLink(l)
 					if(checks.status == 200){
-						Client.reply(from, `Group link detected!`, message)
-						client.groupRemove(from, [sender]).catch(() => Client.reply(from, `Jadikan bot admin agar bisa menggunakan fitur antilink`, message))
+						Client.reply(from, `Обнаружена ссылка!`, message)
+						client.groupRemove(from, [sender]).catch(() => Client.reply(from, `Предоставьте боту, админику для  возможности использовать функцию антиссылки!`, message))
 					}
 				})
 			}
