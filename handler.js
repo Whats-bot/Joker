@@ -1044,9 +1044,7 @@ module.exports = handle = (client, Client) => {
                 case 'text3d':
                 case 'logobp':
                 case 'leavest':
-                case 'thundertext':
                 case 'tlight':
-                case 'naruto':
                 case 'crosslogo':
                 case 'cslogo':
                 case 'crismes':
@@ -1058,9 +1056,9 @@ module.exports = handle = (client, Client) => {
                 case 'nulis':
                     try {
                     if(isLimit(data.sender)) return data.reply(mess.limit)
-                    if(data.body == "") return data.reply(`Kirim perintah *${data.prefix}${data.command} [ teks ]*\nContoh : ${data.prefix}${data.command} shiro`)
+                    if(data.body == "") return data.reply(`Отправлять заказы *${data.prefix}${data.command} [ teks ]*\nContoh : ${data.prefix}${data.command} shiro`)
                     data.reply(mess.wait)
-                    Client.sendFileFromUrl(from, `${configs.apiUrl}/api/${command}?text=${data.body}&apikey=${configs.zeksKey}`, 'gambar.jpg', `*Gambar berhasil dibuat!* @${data.sender.split('@')[0]}`, message)
+                    Client.sendFileFromUrl(from, `${configs.apiUrl}/api/${command}?text=${data.body}&apikey=${configs.zeksKey}`, 'gambar.jpg', `*Изображение успешно сделано!* @${data.sender.split('@')[0]}`, message)
                     } catch {
                         data.reply('error')
                     }
@@ -1075,27 +1073,14 @@ module.exports = handle = (client, Client) => {
                 case 'watercolour':
                     try {
                     if(isLimit(data.sender)) return data.reply(mess.limit)
-                    if(data.body == "") return data.reply(`Kirim perintah *${data.prefix}${data.command} [ teks1|teks2 ]*\nContoh : ${data.prefix}${data.command} shiro|elios`)
+                    if(data.body == "") return data.reply(`Отправлять заказы *${data.prefix}${data.command} [ teks1|teks2 ]*\nContoh : ${data.prefix}${data.command} shiro|elios`)
                     data.reply(mess.wait)
                     p = data.body
                     text = p.split('|')
-                    Client.sendFileFromUrl(from, `${configs.apiUrl}/api/${command}?apikey=${configs.zeksKey}&text1=${text[0]}&text2=${text[1]}`, 'p.jpg', `*Gambar berhasil dibuat!* @${data.sender.split('@')[0]}`, message)
+                    Client.sendFileFromUrl(from, `${configs.apiUrl}/api/${command}?apikey=${configs.zeksKey}&text1=${text[0]}&text2=${text[1]}`, 'p.jpg', `*Изображение успешно сделано!* @${data.sender.split('@')[0]}`, message)
                     } catch {
                         data.reply('error')
                     }
-					break
-                case 'tahta':
-                case 'harta':
-                case 'hartatahta':
-                    if(isLimit(data.sender)) return data.reply(mess.limit)
-                    if(data.body == "") return data.reply(`Kirim perintah *${data.prefix}${data.command} [ teks ]*\nContoh : ${data.prefix}${data.command} shiro`)
-                    data.reply(mess.wait)
-                    Client.sendFileFromUrl(from, `${configs.apiUrl}/api/hartatahta?text=${data.body}&apikey=${configs.zeksKey}`, 'harta.jpg', `*Gambar berhasil dibuat!* @${data.sender.split('@')[0]}`, message)
-                    Client.sendStickerFromUrl(from, `${configs.apiUrl}/api/hartatahta?text=${data.body}&apikey=${configs.zeksKey}`, message, {
-                        crop: false,
-                        pack: 'Pack',
-                        author: 'AUTHOR'
-                    })
                     break
                     /*SEARCHING*/
                 case 'playstore':
