@@ -22,9 +22,10 @@
 ### Install ⬇️
 
 ```bash
-> git clone https://github.com/FREDOM1979/valera/
+> git clone https://github.com/FREDOM1979/valera
 > cd valera
 > npm i
+> npm start
 ```
 ### For termux users before running the above command write this command
 ```bash
