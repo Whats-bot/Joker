@@ -753,7 +753,7 @@ module.exports = handle = (client, Client) => {
             } else data.reply(`Wrong format!, Example: tag someone or reply image\n${data.prefix}missing lost|idk|call xxxxx|@${client.user.jid.split('@')[0]}`)
 
         })
-        Client.cmd.on('calender', async (data) => {
+        Client.cmd.on('календарь', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
             data.reply(mess.wait)
             if(data.isQuotedImage || data.type == 'imageMessage') {
