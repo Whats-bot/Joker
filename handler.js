@@ -964,7 +964,7 @@ module.exports = handle = (client, Client) => {
                     const buff = await client.downloadMediaMessage(JSON.parse(JSON.stringify(data.message).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo)
                     Client.sendWebpAsSticker(data.from, buff.toString('base64'), data.message, {pack: `${text[0]}`, author: `${text[1]}`, emojis: data.body.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g)})
                     break
-                case 'Неверный формат !, отметьте кого-нибудь или ответное изображение с помощью':
+                case 'огненыйстик':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
                     if(data.isQuotedImage || data.type == 'imageMessage') {
                         const getbuffs = data.isQuotedImage ? await data.downloadMediaQuotedMessage() : await data.downloadMediaMessage()
@@ -989,7 +989,7 @@ module.exports = handle = (client, Client) => {
                             pack: `${configs.pack}`,
                             author: `${configs.author}`
                         })
-                    } else data.reply(`Неверный формат !, отметьте кого-нибудь или ответное изображение с помощью ${data.prefix}Неверный формат !, отметьте кого-нибудь или ответное изображение с помощью`)
+                    } else data.reply(`Неверный формат !, отметьте кого-нибудь или ответное изображение с помощью ${data.prefix}огненыйстик`)
                     break
                     /*TEXT MAKER*/
                 case 'qrencode':
