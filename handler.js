@@ -1098,7 +1098,7 @@ module.exports = handle = (client, Client) => {
                     break
                     /*GROUP*/
                 case 'hidetag':
-                case 'обьяление':
+                case 'обьявление':
                     if(!isAdmin) return data.reply('может использоваться только администратором!')
                     var mention = []
                     data.groupMetadata.participants.forEach((member, i) => {
