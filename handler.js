@@ -118,26 +118,9 @@ module.exports = handle = (client, Client) => {
             }
         })
         /*RANDOM*/
-        Client.cmd.on('estetikpic', async (data) => {
+        Client.cmd.on('красивыефото', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
             Client.sendFileFromUrl(data.from, `${configs.apiUrl}/api/estetikpic?apikey=${configs.zeksKey}`, 'estetik.jpg', ``, data.message)
-        })
-        Client.cmd.on('meme', async (data) => {
-            if(isLimit(data.sender)) return data.reply(mess.limit)
-            res = await axios.get(`${configs.apiUrl}/api/memeindo?apikey=${configs.zeksKey}`)
-            Client.sendFileFromUrl(data.from, res.data.result, 'p.jpg', ``, data.message)
-        })
-        Client.cmd.on('darkjoke', async (data) => {
-            if(isLimit(data.sender)) return data.reply(mess.limit)
-            res = await axios.get(`${configs.apiUrl}/api/darkjokes?apikey=${configs.zeksKey}`)
-            Client.sendFileFromUrl(data.from, res.data.result, 'p.jpg', ``, data.message)
-        })
-        Client.cmd.on('nickepep', async (data) => {
-            if(isLimit(data.sender)) return data.reply(mess.limit)
-            res = await axios.get(`${configs.apiUrl}/api/nickepep?apikey=${configs.zeksKey}`)
-            n = res.data.result
-            nick = n[Math.floor(Math.random() * n.length)]
-            data.reply(nick)
         })
         Client.cmd.on('limit', async (data) => {
             const dataUser = JSON.parse(fs.readFileSync('./lib/json/dataUser.json'))
@@ -818,7 +801,7 @@ module.exports = handle = (client, Client) => {
                 case 'с':
                 case 'стикер':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
-                    if(type != 'videoMessage' && !isQuotedVideo && !isQuotedImage && type != 'imageMessage') return data.reply('Wrong format!')
+                    if(type != 'videoMessage' && !isQuotedVideo && !isQuotedImage && type != 'imageMessage') return data.reply('Неверный формат!')
                     const getbuff = data.isQuotedVideo || data.isQuotedImage ? JSON.parse(JSON.stringify(data.message).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : data.message
                     const dlfile = await client.downloadMediaMessage(getbuff)
                     if(type == 'videoMessage' || isQuotedVideo) Client.sendMp4AsSticker(from, dlfile.toString('base64'), message, { pack: `${configs.pack}`, author: `${configs.author}` })
@@ -827,14 +810,14 @@ module.exports = handle = (client, Client) => {
                 case 'tomp3':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
 					data.reply(mess.wait)
-                    if(type != 'videoMessage' && !isQuotedVideo) return data.reply('Wrong format!')
+                    if(type != 'videoMessage' && !isQuotedVideo) return data.reply('Неверный формат!')
 					const getbuffz = data.isQuotedVideo ? JSON.parse(JSON.stringify(message).replace('quotedM','m')).message.extendedTextMessage.contextInfo : data.message	
 				    const dlfilez = await client.downloadMediaMessage(getbuffz)
                     convertMp3(dlfilez).then(data =>Client.sendFileFromUrl(from, data, 'p.mp3', '', message)).catch(er => Client.reply(from, 'Unexpected error!', message))
 					break
                 case 'стиксподписью':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
-                    if(type != 'videoMessage' && !isQuotedVideo && !isQuotedImage && type != 'imageMessage') return data.reply('Wrong format!')
+                    if(type != 'videoMessage' && !isQuotedVideo && !isQuotedImage && type != 'imageMessage') return data.reply('Неверный формат!')
                     if(data.body == "") return data.reply(`Отправить команду *${data.prefix}${data.command} [ pack|author ]*\nПример : ${data.prefix}${data.command} друзьяшки|odinoky`)
                     data.reply(mess.wait)
                     const getbuffs = data.isQuotedVideo || data.isQuotedImage ? JSON.parse(JSON.stringify(data.message).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : data.message
@@ -917,7 +900,7 @@ module.exports = handle = (client, Client) => {
                         data.reply('error')
                     }
                     break
-                case 'wolflogo':
+                case 'логотипволка':
                 case 'logoaveng':
                 case 'phlogo':
                 case 'marvellogo':
@@ -1051,22 +1034,6 @@ module.exports = handle = (client, Client) => {
                         data.reply(`Maaf jawaban tidak ditemukan`)
                     }
                     break
-                case 'spotify':
-                    try {
-                        if(isLimit(data.sender)) return data.reply(mess.limit)
-                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}spotify [ lagu ]*\nПример : ${data.prefix}spotify melukis senja`)
-                        data.reply(mess.wait)
-                        res = await axios.get(`${configs.apiUrl}/api/spotify?apikey=${configs.zeksKey}&q=${data.body}`)
-                        ttt = res.data.data
-                        var teks = `*「 SPOTIFY 」*\n\n*Hasil Pencarian : ${data.body}*\n\n`
-                        for(let i = 0; i < ttt.length; i++) {
-                            teks += `*Judul* : ${ttt[i].title}\n*Artis*: ${ttt[i].artists}\n*Album* : ${ttt[i].album}\n*Link*: ${ttt[i].url}\n*Preview*: ${ttt[i].preview_mp3}\n\n`
-                        }
-                        await Client.sendFileFromUrl(from, ttt[0].thumb, 'p.jpg', teks, message)
-                    } catch {
-                        data.reply(`Maaf lagu ${data.body} tidak ditemukan`)
-                    }
-                    break
                 case 'gsmarena':
                     try {
                         if(isLimit(data.sender)) return data.reply(mess.limit)
@@ -1080,7 +1047,7 @@ module.exports = handle = (client, Client) => {
                     }
                     break
                 case 'searchmusic':
-                case 'searchmusik':
+                case 'поискмузыки':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
                     if(data.isQuotedAudio) {
                         files = await client.downloadMediaMessage(JSON.parse(JSON.stringify(message).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo)
@@ -1100,7 +1067,7 @@ module.exports = handle = (client, Client) => {
                                     Client.reply(from, `_[ *Search Music* ]_\n\n*Title*: ${data.data.title}\n*Artists*: ${data.data.artists}\n*Genre*: ${data.data.genre}\n*Album*: ${data.data.album}\n*Release date*: ${data.data.release_date}`, message)
                                 } else Client.reply(from, data.message, message)
                             }).catch(() => Client.reply(from, 'Internal server error!, try again later', message))
-                    } else Client.reply(from, 'Wrong format!', message)
+                    } else Client.reply(from, 'Неверный формат!', message)
                     break
                 case 'обои':
 				    try{
@@ -1129,17 +1096,6 @@ module.exports = handle = (client, Client) => {
                         data.reply(`error`)
                     }
                     break
-                case 'jagokata':
-                    if(isLimit(data.sender)) return data.reply(mess.limit)
-                    if(data.body == "") return data.reply(`Отправить команду *${data.prefix}jagokata [ apk ]*\nПример : ${data.prefix}jagokata bersyukurlah`)
-                    data.reply(mess.wait)
-                    res = await axios.get(`${configs.apiUrl}/api/jagokata?apikey=${configs.zeksKey}&q=${data.body}`)
-                    if(res.data.status == false) data.reply(res.data.message)
-                    ttt = res.data.result
-                    var teks = `*「 JAGOKATA 」*\n\n*Hasil Pencarian : ${data.body}*\n\n`
-                    ttt.forEach(tt1 => teks += `*Kata* : ${tt1.kata}\n*Author* : ${tt1.author}\n*Info*: ${tt1.author_info}\n*Link*: ${tt1.author_url}\n\n` )
-                    await data.reply(teks)
-                    break
                     /*GROUP*/
                 case 'hidetag':
                 case 'обьяление':
@@ -1154,7 +1110,7 @@ module.exports = handle = (client, Client) => {
                         }
                     })
                     break
-                case 'ссылкагруппы':
+                case 'сылкагруппы':
                     if(!data.isGroup) return data.reply(mess.group)
                     if(!data.botIsAdmin) return data.reply(mess.botAdmin)
                     linkgc = await client.groupInviteCode(data.from)
