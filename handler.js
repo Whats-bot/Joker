@@ -480,6 +480,44 @@ module.exports = handle = (client, Client) => {
             client.relayWAMessage(po, {waitForAck: true})
 			}
         })
+		Client.cmd.on('антиссылка', (data) => {
+            if(!data.isGroup) return data.reply(mess.admin)
+            if(!data.isAdmin) return data.reply(mess.admin)
+            if(!data.botIsAdmin) return data.reply(mess.botAdmin)
+            const dataGc = JSON.parse(fs.readFileSync('./lib/json/dataGc.json'))
+            if(data.args[0].toLowerCase() == 'on') {
+                if(dataGc[data.from].antilink) return data.reply('уже включено!')
+                dataGc[data.from].antilink = true
+                fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
+                data.reply('Sukses!')
+            } else if(data.args[0].toLowerCase() == 'off') {
+                if(!dataGc[data.from].antilink) return data.reply('уже отключена!')
+                dataGc[data.from].antilink = false
+                fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
+                data.reply('Sukses!')
+            } else {
+				let po = client.prepareMessageFromContent(data.from, {
+					"listMessage":{
+                  "title": "*ПОМОЩНИК*",
+                  "description": "сделай выбор ВКЛЮЧИТЬ/ВЫКЛЮЧИТЬ",
+                  "buttonText": "КОМАНДЫ",
+                  "listType": "SINGLE_SELECT",
+                  "sections": [
+                     {
+                        "rows": [
+                           {
+                              "title": "ВКЛЮЧИТЬ",
+                              "rowId": `${data.prefix}${data.command} on`
+                           },
+						   {
+                              "title": "ВЫКЛЮЧИТЬ",
+                              "rowId": `${data.prefix}${data.command} off`
+                           }
+                        ]
+                     }]}}, {}) 
+            client.relayWAMessage(po, {waitForAck: true})
+			}
+        })
         Client.cmd.on('сброситьссылку', (data) => {
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)

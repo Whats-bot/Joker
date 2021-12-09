@@ -92,8 +92,8 @@ const starts = async (sesName) => {
 				dtclink.forEach(async l => {
 					checks = await Client.checkInviteLink(l)
 					if(checks.status == 200){
-						Client.reply(from, `Group link detected!`, message)
-						client.groupRemove(from, [sender]).catch(() => Client.reply(from, `Jadikan bot admin agar bisa menggunakan fitur antilink`, message))
+						Client.reply(from, `Обнаружена ссылка на группу!`, message)
+						client.groupRemove(from, [sender]).catch(() => Client.reply(from, `Сделайте бота администратором, чтобы вы могли использовать функцию антиссылки.`, message))
 					}
 				})
 			}
