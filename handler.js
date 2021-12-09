@@ -632,7 +632,7 @@ module.exports = handle = (client, Client) => {
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
             if(data.body == "") return data.reply(`Отправить команду *${data.prefix}${data.command} [ nomor ]*\nПример : ${data.prefix}${data.command} 6285736996646`)
             args = data.args.map(mp => mp + "@s.whatsapp.net")
-            client.groupAdd(data.from, args).then(() => data.reply(`Berhasil menambahkan @${data.args.join(' @')}`)).catch(() => data.reply('Unable to invite'))
+            client.groupAdd(data.from, args).then(() => data.reply(`Успешно добавлен @${data.args.join(' @')}`)).catch(() => data.reply('Невозможно пригласить'))
         })
         Client.cmd.on('testing', async (data) => {
             console.log(client)
