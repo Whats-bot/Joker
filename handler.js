@@ -1065,9 +1065,9 @@ module.exports = handle = (client, Client) => {
                                 data
                             }) => {
                                 if(data.status) {
-                                    Client.reply(from, `_[ *Search Music* ]_\n\n*Title*: ${data.data.title}\n*Artists*: ${data.data.artists}\n*Genre*: ${data.data.genre}\n*Album*: ${data.data.album}\n*Release date*: ${data.data.release_date}`, message)
+                                    Client.reply(from, `_[ *Search Music* ]_\n\n*Заголовок*: ${data.data.title}\n*Исполнитель*: ${data.data.artists}\n*Жанр*: ${data.data.genre}\n*Альбом*: ${data.data.album}\n*Дата выхода*: ${data.data.release_date}`, message)
                                 } else Client.reply(from, data.message, message)
-                            }).catch(() => Client.reply(from, 'Internal server error!, try again later', message))
+                            }).catch(() => Client.reply(from, 'Внутренняя ошибка сервера! Повторите попытку позже', message))
                     } else Client.reply(from, 'Неверный формат!', message)
                     break
                 case 'обои':
