@@ -373,12 +373,12 @@ module.exports = handle = (client, Client) => {
             if(!data.isAdmin) return data.reply(mess.admin)
             const dataGc = JSON.parse(fs.readFileSync('./lib/json/dataGc.json'))
             if(data.args[0].toLowerCase() == 'on') {
-                if(dataGc[data.from].leave) return data.reply('Already on!')
+                if(dataGc[data.from].leave) return data.reply('Уже включено!')
                 dataGc[data.from].leave = true
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
                 data.reply('Успешно!')
             } else if(data.args[0].toLowerCase() == 'off') {
-                if(!dataGc[data.from].leave) return data.reply('Already off!')
+                if(!dataGc[data.from].leave) return data.reply('Уже выключено!')
                 dataGc[data.from].leave = false
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
                 data.reply('Успешно!')
@@ -480,45 +480,7 @@ module.exports = handle = (client, Client) => {
             client.relayWAMessage(po, {waitForAck: true})
 			}
         })
-		Client.cmd.on('антиссылка', (data) => {
-            if(!data.isGroup) return data.reply(mess.admin)
-            if(!data.isAdmin) return data.reply(mess.admin)
-            if(!data.botIsAdmin) return data.reply(mess.botAdmin)
-            const dataGc = JSON.parse(fs.readFileSync('./lib/json/dataGc.json'))
-            if(data.args[0].toLowerCase() == 'on') {
-                if(dataGc[data.from].antilink) return data.reply('Уже включено!')
-                dataGc[data.from].antilink = true
-                fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Успешно!')
-            } else if(data.args[0].toLowerCase() == 'off') {
-                if(!dataGc[data.from].antilink) return data.reply('Уже выключено!')
-                dataGc[data.from].antilink = false
-                fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Успешно!')
-            } else {
-				let po = client.prepareMessageFromContent(data.from, {
-					"listMessage":{
-                  "title": "*ПОМОЩНИК*",
-                  "description": "сделай выбор вкл/выкл",
-                  "buttonText": "КОМАНДЫ",
-                  "listType": "SINGLE_SELECT",
-                  "sections": [
-                     {
-                        "rows": [
-                           {
-                              "title": "ВКЛ",
-                              "rowId": `${data.prefix}${data.command} on`
-                           },
-						   {
-                              "title": "ВЫКЛ",
-                              "rowId": `${data.prefix}${data.command} off`
-                           }
-                        ]
-                     }]}}, {}) 
-            client.relayWAMessage(po, {waitForAck: true})
-			}
-        })
-        Client.cmd.on('revoke', (data) => {
+        Client.cmd.on('сброситьссылку', (data) => {
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
             if(!data.isAdmin) return data.reply(mess.admin)
@@ -575,7 +537,7 @@ module.exports = handle = (client, Client) => {
             })
             Client.sendText(data.from, text)
         })
-        Client.cmd.on('setgroupicon', async (data) => {
+        Client.cmd.on('сменитьаватаркугруппы', async (data) => {
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.isAdmin) return data.reply(mess.admin)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
@@ -585,7 +547,7 @@ module.exports = handle = (client, Client) => {
             client.updateProfilePicture(data.from, dlfile)
             data.reply(`success!, group icon has been changed by @${data.sender.split('@')[0]}`)
         })
-        Client.cmd.on('setgroupname', async (data) => {
+        Client.cmd.on('сменитьназваниегруппы', async (data) => {
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.isAdmin) return data.reply(mess.admin)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
@@ -593,7 +555,7 @@ module.exports = handle = (client, Client) => {
             client.groupUpdateSubject(data.from, `${data.body}`)
             data.reply(`Nama group telah diganti oleh admin @${data.sender.split('@')[0]}`)
         })
-        Client.cmd.on('setgroupdesc', async (data) => {
+        Client.cmd.on('сменитьописаниегруппы', async (data) => {
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.isAdmin) return data.reply(mess.admin)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
@@ -838,6 +800,7 @@ module.exports = handle = (client, Client) => {
                     }
                     break
                 case 'огненыйстик':
+                case 'огненныйстик':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
                     if(data.isQuotedImage || data.type == 'imageMessage') {
                         const getbuffs = data.isQuotedImage ? await data.downloadMediaQuotedMessage() : await data.downloadMediaMessage()
@@ -1099,6 +1062,8 @@ module.exports = handle = (client, Client) => {
                     /*GROUP*/
                 case 'hidetag':
                 case 'обьявление':
+                case 'обявление':
+                case 'объявление':
                     if(!isAdmin) return data.reply('может использоваться только администратором!')
                     var mention = []
                     data.groupMetadata.participants.forEach((member, i) => {
@@ -1111,6 +1076,7 @@ module.exports = handle = (client, Client) => {
                     })
                     break
                 case 'сылкагруппы':
+                case 'ссылкагруппы':
                     if(!data.isGroup) return data.reply(mess.group)
                     if(!data.botIsAdmin) return data.reply(mess.botAdmin)
                     linkgc = await client.groupInviteCode(data.from)
