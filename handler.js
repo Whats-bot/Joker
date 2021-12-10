@@ -240,7 +240,7 @@ module.exports = handle = (client, Client) => {
             }
             fs.writeFileSync('./lib/json/dataUser.json', JSON.stringify(dataUser))
             console.log(color('[ INFO ]', 'cyan'), 'LIMIT RESETED!')
-            data.reply('Успешно!')
+            data.reply('выполнено!')
         })
         Client.cmd.on('bc', async (data) => {
             if(!data.isOwner) return data.reply(mess.ownerOnly)
@@ -306,12 +306,12 @@ module.exports = handle = (client, Client) => {
                 if(dataGc[data.from].welcome) return data.reply('Уже включено!!')
                 dataGc[data.from].welcome = true
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Успешно!')
+                data.reply('выполнено!')
             } else if(data.args[0].toLowerCase() == 'off') {
                 if(!dataGc[data.from].welcome) return data.reply('Уже выключено!')
                 dataGc[data.from].welcome = false
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Успешно!')
+                data.reply('выполнено!')
             } else {
 				let po = client.prepareMessageFromContent(data.from, {
 					"listMessage":{
@@ -348,12 +348,12 @@ module.exports = handle = (client, Client) => {
                         "rows": [
                            {
                               "title": "MP3",
-							  description: `Title: ${xres.video.title}\n\nUploader: ${xres.uploader.username}`,
+							  description: `Заголовок: ${xres.video.title}\n\nЗагрузчик: ${xres.uploader.username}`,
                               "rowId": `${data.prefix}ytmp3 ${xres.video.url}`
                            },
 						   {
                               "title": "MP4",
-							  description: `Title: ${xres.video.title}\n\nUploader: ${xres.uploader.username}`,
+							  description: `Заголовок: ${xres.video.title}\n\nЗагрузчик: ${xres.uploader.username}`,
                               "rowId": `${data.prefix}ytmp4 ${xres.video.url}`
                            }
                         ], title: i+1})
@@ -361,8 +361,8 @@ module.exports = handle = (client, Client) => {
 			let po = client.prepareMessageFromContent(data.from, {
 				  "listMessage":{
                   "title": "*YOUTUBE DOWNLOAD*",
-                  "description": `*Result for : ${data.body}*\n*Download video by click button bellow*`,
-                  "buttonText": "Result",
+                  "description": `*Result for : ${data.body}*\n*Скачать видео, нажав на кнопку внизу*`,
+                  "buttonText": "Результат",
                   "listType": "SINGLE_SELECT",
                   "sections": secs}}, {}) 
             client.relayWAMessage(po, {waitForAck: true})	
@@ -376,12 +376,12 @@ module.exports = handle = (client, Client) => {
                 if(dataGc[data.from].leave) return data.reply('Уже включено!')
                 dataGc[data.from].leave = true
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Успешно!')
+                data.reply('выполнено!')
             } else if(data.args[0].toLowerCase() == 'off') {
                 if(!dataGc[data.from].leave) return data.reply('Уже выключено!')
                 dataGc[data.from].leave = false
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Успешно!')
+                data.reply('выполнено!')
             } else {
 				let po = client.prepareMessageFromContent(data.from, {
 					"listMessage":{
@@ -413,12 +413,12 @@ module.exports = handle = (client, Client) => {
                 if(dataGc[data.from].antiviewonce) return data.reply('Already on!')
                 dataGc[data.from].antiviewonce = true
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Успешно!')
+                data.reply('выполнено!')
             } else if(data.args[0].toLowerCase() == 'off') {
                 if(!dataGc[data.from].antiviewonce) return data.reply('Already off!')
                 dataGc[data.from].antiviewonce = false
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Успешно!')
+                data.reply('выполнено!')
             } else {
 				let po = client.prepareMessageFromContent(data.from, {
 					"listMessage":{
@@ -451,12 +451,12 @@ module.exports = handle = (client, Client) => {
                 if(dataGc[data.from].antitagall) return data.reply('Already on!')
                 dataGc[data.from].antitagall = true
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Успешно!')
+                data.reply('выполнено!')
             } else if(data.args[0].toLowerCase() == 'off') {
                 if(!dataGc[data.from].antitagall) return data.reply('Already off!')
                 dataGc[data.from].antitagall = false
                 fs.writeFileSync('./lib/json/dataGc.json', JSON.stringify(dataGc))
-                data.reply('Успешно!')
+                data.reply('выполнено!')
             } else {
 				let po = client.prepareMessageFromContent(data.from, {
 					"listMessage":{
