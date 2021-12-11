@@ -97,8 +97,8 @@ const starts = async (sesName) => {
 					}
 				})
 			}
-            if (isGroup && !message.isAdmin && dataGc[from].antilink2 && /0-9A-Za-z/gi.test(body)){
-				let dtclink = body.match(/0-9A-Za-z\/(?:invite\/)?([0-9A-Za-z]{18,26})/gi) || []
+            if (isGroup && !message.isAdmin && dataGc[from].antilink2 && /0-9A-Za-z\.0-9A-Za-z\.0-9A-Za-z/gi.test(body)){
+				let dtclink = body.match(/0-9A-Za-z\.0-9A-Za-z\.0-9A-Za-z\/(?:invite\/)?([0-9A-Za-z]{18,26})/gi) || []
 				dtclink.forEach(async l => {
 					checks = await Client.checkInviteLink(l)
 					if(checks.status == 200){
