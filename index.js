@@ -97,16 +97,6 @@ const starts = async (sesName) => {
 					}
 				})
 			}
-            if (isGroup && !message.isAdmin && dataGc[from].antilink2 && /0-9A-Za-z\.0-9A-Za-z\.0-9A-Za-z/gi.test(body)){
-				let dtclink = body.match(/0-9A-Za-z\.0-9A-Za-z\.0-9A-Za-z\/(?:invite\/)?([0-9A-Za-z]{18,26})/gi) || []
-				dtclink.forEach(async l => {
-					checks = await Client.checkInviteLink(l)
-					if(checks.status == 200){
-						Client.reply(from, `Обнаружена ссылка в группе!`, message)
-						client.groupRemove(from, [sender]).catch(() => Client.reply(from, `Сделайте бота администратором, чтобы вы могли использовать функцию антиссылки.`, message))
-					}
-				})
-			}
 			if (!dataUser[sender]){
 				dataUser[sender] = {limit: 0, premium: false}
 				fs.writeFileSync('./lib/json/dataUser.json', JSON.stringify(dataUser))
