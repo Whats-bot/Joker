@@ -609,7 +609,7 @@ module.exports = handle = (client, Client) => {
             if(data.mentionedJidList.length == 0) return data.reply(`Отправить команду *${data.prefix}${data.command} [ @tag ]*\nПример : ${data.prefix}${data.command} @0`)
             client.groupMakeAdmin(data.from, data.mentionedJidList).then(() => data.reply(`Команда принята,  @${data.mentionedJidList.join(' @').replace(/@s.whatsapp.net/g, '')} добавлен в качестве администратора..`)).catch(() => data.reply('Неудача!'))
         })
-        Client.cmd.on('снятьадминку', async (data) => {
+        Client.cmd.on('снятьадмина', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.isAdmin) return data.reply(mess.admin)
@@ -630,9 +630,9 @@ module.exports = handle = (client, Client) => {
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.isAdmin) return data.reply(mess.admin)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
-            if(data.body == "") return data.reply(`Отправить команду *${data.prefix}${data.command} [ nomor ]*\nПример : ${data.prefix}${data.command} 6285736996646`)
+            if(data.body == "") return data.reply(`Отправить команду *${data.prefix}${data.command} [ nomor ]*\nПример : ${data.prefix}${data.command} 7994xxxxxxx`)
             args = data.args.map(mp => mp + "@s.whatsapp.net")
-            client.groupAdd(data.from, args).then(() => data.reply(`Успешно добавлен @${data.args.join(' @')}`)).catch(() => data.reply('Невозможно пригласить'))
+            client.groupAdd(data.from, args).then(() => data.reply(`вроде как должен быть добавлен \nnно это не точно/ @${data.args.join(' @')}`)).catch(() => data.reply('Невозможно пригласить'))
         })
         Client.cmd.on('testing', async (data) => {
             console.log(client)
@@ -826,17 +826,6 @@ module.exports = handle = (client, Client) => {
                     if(type == 'videoMessage' || isQuotedVideo) Client.sendMp4AsSticker(from, dlfiles.toString('base64'), message, { crop: false, pack: `${text[0]}`, author: `${text[1]}` })
                     else Client.sendImageAsSticker(from, dlfiles.toString('base64'), message, { pack: `${text[0]}`, author: `${text[1]}`, emojis: data.body.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) })
                     break
-                case 'stikeremoji':
-                case 'stickeremoji':
-                case 'semoji':
-                    try {
-                        if(isLimit(data.sender)) return data.reply(mess.limit)
-                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}${data.command} [ emoji ]*\nПример : ${data.prefix}${data.command} 😃`)
-                        Client.sendStickerFromUrl(from, `${configs.apiUrl}/api/emoji-image?apikey=${configs.zeksKey}&emoji=${encodeURIComponent(data.body)}`, message, { pack: `${configs.pack}`, author: `${configs.author}`, emojis: data.body.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g)})
-                    } catch {
-                        data.reply('error')
-                    }
-                    break
                 case 'огненыйстик':
                 case 'огненныйстик':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
@@ -1020,33 +1009,7 @@ module.exports = handle = (client, Client) => {
                         Client.sendFileFromUrl(from, pe.profile_pic, 'p.jpg', tek, message)
                     } catch {
                         data.reply(`Maaf username ${data.body} tidak ditemukan`)
-                    }
-                    break
-                case 'brainly':
-                    try {
-                        if(isLimit(data.sender)) return data.reply(mess.limit)
-                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}brainly [ query ]*\nПример : ${data.prefix}brainly siapa penemu lampu`)
-                        data.reply(mess.wait)
-                        res = await axios.get(`${configs.apiUrl}/api/brainly?apikey=${configs.zeksKey}&q=${data.body}&count=3`)
-                        for(let i = 0; i < res.data.data.length; i++) {
-                            await Client.reply(from, `Pertanyaan : ${res.data.data[i].question}\n\nJawaban : ${res.data.data[i].answer[0].text}`, message)
-                        }
-                    } catch {
-                        data.reply(`Maaf jawaban tidak ditemukan`)
-                    }
-                    break
-                case 'gsmarena':
-                    try {
-                        if(isLimit(data.sender)) return data.reply(mess.limit)
-                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}gsmarena [ hp ]*\nПример : ${data.prefix}gsmarena asus rog phone 3`)
-                        data.reply(mess.wait)
-                        res = await axios.get(`${configs.apiUrl}/api/gsmArena?apikey=${configs.zeksKey}&q=${data.body}`)
-                        captions = `*HP* : ${res.data.data.title}\n\n${res.data.data.full_desc.string}\n${res.data.data.link}`
-                        Client.sendFileFromUrl(from, res.data.data.thumb, 'p.jpg', captions, message)
-                    } catch (e) {
-                        data.reply(`Maaf hp ${data.body} tidak ditemukan`)
-                    }
-                    break
+                    }break
                 case 'searchmusic':
                 case 'поискмузыки':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
