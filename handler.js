@@ -518,7 +518,7 @@ module.exports = handle = (client, Client) => {
             client.relayWAMessage(po, {waitForAck: true})
 			}
         })
-        Client.cmd.on('сброситьссылку', (data) => {
+        Client.cmd.on('отозватьссылку', (data) => {
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
             if(!data.isAdmin) return data.reply(mess.admin)
@@ -623,7 +623,7 @@ module.exports = handle = (client, Client) => {
             if(!data.isAdmin) return data.reply(mess.admin)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
             if(data.mentionedJidList.length == 0) return data.reply(`Отправить команду *${data.prefix}${data.command} [ @tag ]*\nПример : ${data.prefix}${data.command} @0`)
-            data.mentionedJidList.forEach(async jid =>{ client.groupRemove(data.from, [jid]).then(x => data.reply(`Неудалось удалить @${jid.split('@')[0]}`)).catch(x => data.reply(`Неудалось удалить @${jid.split('@')[0]}`)); await sleep(2000)})
+            data.mentionedJidList.forEach(async jid =>{ client.groupRemove(data.from, [jid]).then(x => data.reply(`участник удален @${jid.split('@')[0]}`)).catch(x => data.reply(`Неудалось удалить @${jid.split('@')[0]}`)); await sleep(2000)})
         })
         Client.cmd.on('добавить', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
@@ -1121,20 +1121,6 @@ module.exports = handle = (client, Client) => {
                     data.reply(`https://chat.whatsapp.com/${linkgc}`)
                     break
                     /*DLL*/
-                case 'стикерменю':
-                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/menus.webp'), message).then(resData => Client.sendText(from, 'используйте этот стикер для отображения меню!', {
-                        quoted: resData
-                    }))
-                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/sticks.webp'), message).then(resData => Client.sendText(from, 'используйте этот стикер, чтобы сделать стикер, отметив изображение или видео!', {
-                        quoted: resData
-                    }))
-                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/open.webp'), message).then(resData => Client.sendText(from, 'используйте этот стикер, чтобы открыть группу', {
-                        quoted: resData
-                    }))
-                    Client.sendRawWebpAsSticker(from, fs.readFileSync('./lib/temp/close.webp'), message).then(resData => Client.sendText(from, 'используйте этот стикер, чтобы закрыть группу', {
-                        quoted: resData
-                    }))
-                    break
                 case 'tes':
                     data.reply('auto upt')
                     break
