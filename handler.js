@@ -890,7 +890,7 @@ module.exports = handle = (client, Client) => {
                         data.reply('error')
                     }
                     break
-                case 'логотипволка':
+                case 'wolflogo':
                 case 'logoaveng':
                 case 'phlogo':
                 case 'marvellogo':
