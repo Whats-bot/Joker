@@ -609,7 +609,7 @@ module.exports = handle = (client, Client) => {
             if(data.mentionedJidList.length == 0) return data.reply(`Отправить команду *${data.prefix}${data.command} [ @tag ]*\nПример : ${data.prefix}${data.command} @0`)
             client.groupMakeAdmin(data.from, data.mentionedJidList).then(() => data.reply(`Команда принята,  @${data.mentionedJidList.join(' @').replace(/@s.whatsapp.net/g, '')} добавлен в качестве администратора..`)).catch(() => data.reply('Неудача!'))
         })
-        Client.cmd.on('снятьадминку', async (data) => {
+        Client.cmd.on('снятьадмина', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
             if(!data.isGroup) return data.reply(mess.group)
             if(!data.isAdmin) return data.reply(mess.admin)
@@ -901,7 +901,7 @@ module.exports = handle = (client, Client) => {
                         data.reply('error')
                     }
                     break
-                case 'логотипволка':
+                case 'wolflogo':
                 case 'logoaveng':
                 case 'phlogo':
                 case 'marvellogo':
