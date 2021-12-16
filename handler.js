@@ -921,6 +921,38 @@ module.exports = handle = (client, Client) => {
                     }
                     break
                     /*SEARCHING*/
+                case 'плеймаркет':
+                    try {
+                        if(isLimit(data.sender)) return data.reply(mess.limit)
+                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}playstore [ apk ]*\nПример : ${data.prefix}playstore pubg`)
+                        data.reply(mess.wait)
+                        res = await axios.get(`${configs.apiUrl}/api/sgplay?apikey=${configs.zeksKey}&q=${data.body}`)
+                        ttt = res.data.result
+                        var teks = `*「 ПЛЕЙМАРКЕТ 」*\n\n*Результат поиска : ${data.body}*\n\n`
+                        for(let i = 0; i < ttt.length; i++) {
+                            teks += `*Заголовок* : ${ttt[i].title}\n*Стоимость* : ${ttt[i].price}\n*Версия*: ${ttt[i].rating}\n*Ссылка*: ${ttt[i].url}\n\n`
+                        }
+                        await Client.sendFileFromUrl(from, ttt[0].thumb, 'p.jpg', teks, message)
+                    } catch {
+                        data.reply(`Maaf aplikasi ${data.body} tidak ditemukan`)
+                    }
+                    break
+                case 'iguser':
+                    try {
+                        if(isLimit(data.sender)) return data.reply(mess.limit)
+                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}iguser [ username ]*\nПример : ${data.prefix}iguser jessnolimit`)
+                        data.reply(mess.wait)
+                        res = await axios.get(`${configs.apiUrl}/api/iguser?apikey=${configs.zeksKey}&q=${data.body}`)
+                        ttt = res.data.result
+                        var teks = `*「 INSTAGRAM USER 」*\n\n*Hasil Pencarian : ${data.body}*\n\n`
+                        for(let i = 0; i < ttt.length; i++) {
+                            teks += `*Username* : ${ttt[i].username}\n*Full name*: ${ttt[i].full_name}\n*Akun private* : ${ttt[i].private_user}\n*Verified*: ${ttt[i].verified_user}\n*Link*: https://instagram.com/${ttt[i].username}\n\n`
+                        }
+                        await Client.sendFileFromUrl(from, ttt[0].profile_pic, 'p.jpg', teks, message)
+                    } catch {
+                        data.reply(`Maaf username ${data.body} tidak ditemukan`)
+                    }
+                    break
                 case 'ytsearch':
                     try {
                         if(isLimit(data.sender)) return data.reply(mess.limit)
@@ -1080,6 +1112,13 @@ module.exports = handle = (client, Client) => {
                             "mentionedJid": mention
                         }
                     })
+                    break
+                case 'сылкагруппы':
+                case 'ссылкагруппы':
+                    if(!data.isGroup) return data.reply(mess.group)
+                    if(!data.botIsAdmin) return data.reply(mess.botAdmin)
+                    linkgc = await client.groupInviteCode(data.from)
+                    data.reply(`https://chat.whatsapp.com/${linkgc}`)
                     break
                     /*DLL*/
                 case 'стикерменю':
