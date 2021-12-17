@@ -102,21 +102,6 @@ module.exports = handle = (client, Client) => {
                 data.reply('Имя пользователя не найдено')
             }
         })
-        Client.cmd.on('joox', async (data) => {
-            try {
-                if(isLimit(data.sender)) return data.reply(mess.limit)
-                if(data.body == "") return data.reply(`Отправить команду *${data.prefix}joox [ lagu ]*\nПример : ${data.prefix}joox bad liar`)
-                data.reply(mess.wait)
-                res = await axios.get(`${configs.apiUrl}/api/joox?apikey=${configs.zeksKey}&q=${data.body}`)
-                if(res.data.status == false) data.reply(jox.data.message)
-                jox = res.data.data[0]
-                teks = `*Data berhasil didapatkan!*\n\n*Judul* : ${jox.judul}\n*Artis* : ${jox.artist}\n*Album* : ${jox.album}\n*Ukuran* : ${jox.size}\n\n_Silahkan tunggu file media sedang dikirim mungkin butuh beberapa menit_`
-                Client.sendFileFromUrl(data.from, `${jox.thumb}`, 'thumb.jpg', teks, data.message)
-                Client.sendFileFromUrl(data.from, `${jox.audio}`, 'audio.mp3', ``, data.message)
-            } catch {
-                data.reply('Maaf lagu tidak ditemukan')
-            }
-        })
         /*RANDOM*/
         Client.cmd.on('красивыефото', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
@@ -623,7 +608,7 @@ module.exports = handle = (client, Client) => {
             if(!data.isAdmin) return data.reply(mess.admin)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
             if(data.mentionedJidList.length == 0) return data.reply(`Отправить команду *${data.prefix}${data.command} [ @tag ]*\nПример : ${data.prefix}${data.command} @0`)
-            data.mentionedJidList.forEach(async jid =>{ client.groupRemove(data.from, [jid]).then(x => data.reply(`Неудалось удалить @${jid.split('@')[0]}`)).catch(x => data.reply(`Неудалось удалить @${jid.split('@')[0]}`)); await sleep(2000)})
+            data.mentionedJidList.forEach(async jid =>{ client.groupRemove(data.from, [jid]).then(x => data.reply(`Неудалось удалить @${jid.split('@')[0]}`)).catch(x => data.reply(`Участник удален @${jid.split('@')[0]}`)); await sleep(2000)})
         })
         Client.cmd.on('добавить', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
@@ -826,17 +811,6 @@ module.exports = handle = (client, Client) => {
                     if(type == 'videoMessage' || isQuotedVideo) Client.sendMp4AsSticker(from, dlfiles.toString('base64'), message, { crop: false, pack: `${text[0]}`, author: `${text[1]}` })
                     else Client.sendImageAsSticker(from, dlfiles.toString('base64'), message, { pack: `${text[0]}`, author: `${text[1]}`, emojis: data.body.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g) })
                     break
-                case 'stikeremoji':
-                case 'stickeremoji':
-                case 'semoji':
-                    try {
-                        if(isLimit(data.sender)) return data.reply(mess.limit)
-                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}${data.command} [ emoji ]*\nПример : ${data.prefix}${data.command} 😃`)
-                        Client.sendStickerFromUrl(from, `${configs.apiUrl}/api/emoji-image?apikey=${configs.zeksKey}&emoji=${encodeURIComponent(data.body)}`, message, { pack: `${configs.pack}`, author: `${configs.author}`, emojis: data.body.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g)})
-                    } catch {
-                        data.reply('error')
-                    }
-                    break
                 case 'огненыйстик':
                 case 'огненныйстик':
                     if(isLimit(data.sender)) return data.reply(mess.limit)
@@ -921,38 +895,6 @@ module.exports = handle = (client, Client) => {
                     }
                     break
                     /*SEARCHING*/
-                case 'плеймаркет':
-                    try {
-                        if(isLimit(data.sender)) return data.reply(mess.limit)
-                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}playstore [ apk ]*\nПример : ${data.prefix}playstore pubg`)
-                        data.reply(mess.wait)
-                        res = await axios.get(`${configs.apiUrl}/api/sgplay?apikey=${configs.zeksKey}&q=${data.body}`)
-                        ttt = res.data.result
-                        var teks = `*「 ПЛЕЙМАРКЕТ 」*\n\n*Результат поиска : ${data.body}*\n\n`
-                        for(let i = 0; i < ttt.length; i++) {
-                            teks += `*Заголовок* : ${ttt[i].title}\n*Стоимость* : ${ttt[i].price}\n*Версия*: ${ttt[i].rating}\n*Ссылка*: ${ttt[i].url}\n\n`
-                        }
-                        await Client.sendFileFromUrl(from, ttt[0].thumb, 'p.jpg', teks, message)
-                    } catch {
-                        data.reply(`Maaf aplikasi ${data.body} tidak ditemukan`)
-                    }
-                    break
-                case 'iguser':
-                    try {
-                        if(isLimit(data.sender)) return data.reply(mess.limit)
-                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}iguser [ username ]*\nПример : ${data.prefix}iguser jessnolimit`)
-                        data.reply(mess.wait)
-                        res = await axios.get(`${configs.apiUrl}/api/iguser?apikey=${configs.zeksKey}&q=${data.body}`)
-                        ttt = res.data.result
-                        var teks = `*「 INSTAGRAM USER 」*\n\n*Hasil Pencarian : ${data.body}*\n\n`
-                        for(let i = 0; i < ttt.length; i++) {
-                            teks += `*Username* : ${ttt[i].username}\n*Full name*: ${ttt[i].full_name}\n*Akun private* : ${ttt[i].private_user}\n*Verified*: ${ttt[i].verified_user}\n*Link*: https://instagram.com/${ttt[i].username}\n\n`
-                        }
-                        await Client.sendFileFromUrl(from, ttt[0].profile_pic, 'p.jpg', teks, message)
-                    } catch {
-                        data.reply(`Maaf username ${data.body} tidak ditemukan`)
-                    }
-                    break
                 case 'ytsearch':
                     try {
                         if(isLimit(data.sender)) return data.reply(mess.limit)
@@ -981,22 +923,6 @@ module.exports = handle = (client, Client) => {
                             tekss += `*Nama* : ${ttt[i].title}\n*Jumlah video*: ${ttt[i].video_count}\n*Channel*: ${ttt[i].uploader.username}\n*Link*: ${ttt[i].url}\n\n`
                         }
                         await Client.sendFileFromUrl(from, ttt[0].thumbnail, 'axis.jpg', tekss, message)
-                    } catch(e) {
-                        data.reply(`Maaf pencarian ${data.body} tidak ditemukan`)
-                    }
-                    break
-                case 'ytchannel':
-                    try {
-                        if(isLimit(data.sender)) return data.reply(mess.limit)
-                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}ytchannel [ channel ]*\nПример : ${data.prefix}ytchannel jessnolimit`)
-                        data.reply(mess.wait)
-                        res = await axios.get(`${configs.apiUrl}/api/ytchannel?apikey=${configs.zeksKey}&q=${data.body}`)
-                        ttt = res.data.result
-                        var eks = `*「 YOUTUBE CHANNEL 」*\n\n*Hasil Pencarian : ${data.body}*\n\n`
-                        for(let i = 0; i < ttt.length; i++) {
-                            eks += `*Nama* : ${ttt[i].title}\n*Deskripsi*: ${ttt[i].description}\n*Verified* : ${ttt[i].verified}\n*Jumlah video*: ${ttt[i].video_count}\n*Subcriber*: ${ttt[i].subscriber_count}\n*Link*: ${ttt[i].url}\n\n`
-                        }
-                        await Client.sendFileFromUrl(from, ttt[0].thumbnail, 'axis.jpg', eks, message)
                     } catch(e) {
                         data.reply(`Maaf pencarian ${data.body} tidak ditemukan`)
                     }
@@ -1033,18 +959,6 @@ module.exports = handle = (client, Client) => {
                         }
                     } catch {
                         data.reply(`Maaf jawaban tidak ditemukan`)
-                    }
-                    break
-                case 'gsmarena':
-                    try {
-                        if(isLimit(data.sender)) return data.reply(mess.limit)
-                        if(data.body == "") return data.reply(`Отправить команду *${data.prefix}gsmarena [ hp ]*\nПример : ${data.prefix}gsmarena asus rog phone 3`)
-                        data.reply(mess.wait)
-                        res = await axios.get(`${configs.apiUrl}/api/gsmArena?apikey=${configs.zeksKey}&q=${data.body}`)
-                        captions = `*HP* : ${res.data.data.title}\n\n${res.data.data.full_desc.string}\n${res.data.data.link}`
-                        Client.sendFileFromUrl(from, res.data.data.thumb, 'p.jpg', captions, message)
-                    } catch (e) {
-                        data.reply(`Maaf hp ${data.body} tidak ditemukan`)
                     }
                     break
                 case 'searchmusic':
