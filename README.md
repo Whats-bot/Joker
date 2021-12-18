@@ -22,16 +22,21 @@
 ### Install ⬇️
 
 ```bash
+> apt update
+> apt upgrade
+>  pkg update
+> pkg upgrade 
+> pkg install bash
+> pkg install libwebp
+> pkg install git -y
+> pkg install nodejs -y 
+> pkg install ffmpeg -y 
+> pkg install wget
+> pkg install imagemagick -y
 > git clone https://github.com/FREDOM1979/valera
 > cd valera
 > npm i
 > npm start
-```
-### For termux users before running the above command write this command
-```bash
-> apt-get update
-> apt-get upgrade
-> apt-get install -y nodejs git
 ```
 
 #### Change `config.json` 
