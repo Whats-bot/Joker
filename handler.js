@@ -668,7 +668,7 @@ module.exports = handle = (client, Client) => {
                 ppUrl = await client.getProfilePicture(data.mentionedJidList[0])
                 if(!ppUrl) return data.reply('Изображение  не найдено!')
                 Client.sendFileFromUrl(data.from, `${configs.apiUrl}/api/calender?apikey=${configs.zeksKey}&image=${encodeURIComponent(ppUrl)}`, 'calender.jpg', '*Изображение успешно создано!* ', data.message)
-            } else data.reply(`Неверный формат !, отметьте кого-либо или ответьте на изображение с помощью ${data.prefix}calender`)
+            } else data.reply(`Неверный формат !, отметьте кого-либо или ответьте на изображение с помощью ${data.prefix}календарь`)
 
         })
         Client.cmd.on('рисунок', async (data) => {
@@ -691,7 +691,7 @@ module.exports = handle = (client, Client) => {
                 ppUrl = await client.getProfilePicture(data.mentionedJidList[0])
                 if(!ppUrl) return data.reply('Изображение  не найдено!')
                 Client.sendFileFromUrl(data.from, `${configs.apiUrl}/api/draw-image?apikey=${configs.zeksKey}&image=${encodeURIComponent(ppUrl)}`, 'calender.jpg', '*Изображение успешно создано!* ', data.message)
-            } else data.reply(`Неверный формат !, отметьте кого-либо или ответьте на изображение с помощью ${data.prefix}drawing`)
+            } else data.reply(`Неверный формат !, отметьте кого-либо или ответьте на изображение с помощью ${data.prefix}рисунок`)
 
         })
         Client.cmd.on('рисунок2', async (data) => {
@@ -714,7 +714,7 @@ module.exports = handle = (client, Client) => {
                 ppUrl = await client.getProfilePicture(data.mentionedJidList[0])
                 if(!ppUrl) return data.reply('Изображение  не найдено!')
                 Client.sendFileFromUrl(data.from, `${configs.apiUrl}/api/sketch-image?apikey=${configs.zeksKey}&image=${encodeURIComponent(ppUrl)}`, 'calender.jpg', '*Изображение успешно создано!* ', data.message)
-            } else data.reply(`Неверный формат !, отметьте кого-либо или ответьте на изображение с помощью ${data.prefix}drawing`)
+            } else data.reply(`Неверный формат !, отметьте кого-либо или ответьте на изображение с помощью ${data.prefix}рисунок2`)
 
         })
         //If you want case method
