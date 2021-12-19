@@ -1,0 +1,13 @@
+{	
+	"prefix": ".", 
+	"defaultSessionName": "*Joker*", 
+	"zeksKey": "3NNksEkHXXIk7SZPSxoGkUcNEdF",
+	"autoRead": true,
+	"self": false, 
+	"maxLimit": 30,
+	"ownerList": ["79688986292@s.whatsapp.net"],
+	"apiUrl": "https://api.zeks.me",
+    "imgUrl": "https://miro.medium.com/max/1400/1*I4eKhcG4sLyvAzo3a6Z9Gg.jpeg",
+	"pack": "Sticker",
+	"author": "BOT"
+}
