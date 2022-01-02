@@ -30,12 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Morfeus863/Joker.git"
+    "url": "git+https://github.com/Whats-bot/Joker.git"
   },
   "author": "ben",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Morfeus863/Joker/issues"
+    "url": "https://github.com/Whats-bot/Joker/issues"
   },
-  "homepage": "https://github.com/Morfeus863/Joker#readme"
+  "homepage": "https://github.com/Whats-bot/Joker#readme"
 }
