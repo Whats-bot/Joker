@@ -608,7 +608,7 @@ module.exports = handle = (client, Client) => {
             if(!data.isAdmin) return data.reply(mess.admin)
             if(!data.botIsAdmin) return data.reply(mess.botAdmin)
             if(data.mentionedJidList.length == 0) return data.reply(`Отправить команду *${data.prefix}${data.command} [ @tag ]*\nПример : ${data.prefix}${data.command} @0`)
-            data.mentionedJidList.forEach(async jid =>{ client.groupRemove(data.from, [jid]).then(x => data.reply(`Неудалось удалить @${jid.split('@')[0]}`)).catch(x => data.reply(`Участник удален @${jid.split('@')[0]}`)); await sleep(2000)})
+            data.mentionedJidList.forEach(async jid =>{ client.groupRemove(data.from, [jid]).then(x => data.reply(`Абонент успешно вылетел! @${jid.split('@')[0]}`)).catch(x => data.reply(`Участник удален @${jid.split('@')[0]}`)); await sleep(2000)})
         })
         Client.cmd.on('добавить', async (data) => {
             if(isLimit(data.sender)) return data.reply(mess.limit)
